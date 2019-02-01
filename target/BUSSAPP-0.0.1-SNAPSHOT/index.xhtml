@@ -9,14 +9,18 @@
 
 </h:head>
 <h:body>
-
-	<h:outputLabel value="Teste" /> do jsf
+	<p:growl>
+		<p:autoUpdate />
+	</p:growl>
+	<h:form>
+		<h:outputLabel value="Teste" /> do jsf
 	<p:outputLabel value="Teste" /> do primefaces
 	
 	
 	
-	<h:button value="Botao JSF" />
-	<p:button value="Botao Primefaces" />
-	<p:calendar />
+	<h:button value="#{indexMBean.teste}" />
+		<p:commandButton actionListener="#{indexMBean.clickBotao()}" />
+
+	</h:form>
 </h:body>
 </html>
