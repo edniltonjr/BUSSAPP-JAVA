@@ -1,28 +1,48 @@
 package mbeans;
 
+import java.sql.SQLException;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
-import util.Mensagem;
+import entities.Motorista;
+import entities.Veiculo;
+import uDao.MotoristaDao;
+import uDao.VeiculoDao;
 
 @ManagedBean
 @ViewScoped
 public class IndexMBean {
 
-	private String teste = "Liguei com a tela !!!";
+	private Motorista motorista = new Motorista();
+	private Veiculo veiculo = new Veiculo();
+	private MotoristaDao motoristaDao = new MotoristaDao();
+	private VeiculoDao veiculoDao = new VeiculoDao();
 
-	public String getTeste() {
-		return teste;
+	public IndexMBean() {
+		try {
+			motorista = motoristaDao.buscaMotorista(1);
+			veiculo = veiculoDao.buscaVeiculo(1);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
-	public void setTeste(String teste) {
-		this.teste = teste;
+	public Motorista getMotorista() {
+		return motorista;
 	}
 
-	public void clickBotao() {
-		Mensagem.Make("Teste growl");
+	public void setMotorista(Motorista motorista) {
+		this.motorista = motorista;
 	}
 
-	// tudo tem que ter getter and setter
+	public Veiculo getVeiculo() {
+		return veiculo;
+	}
+
+	public void setVeiculo(Veiculo veiculo) {
+		this.veiculo = veiculo;
+	}
 
 }
