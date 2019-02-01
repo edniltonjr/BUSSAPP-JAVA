@@ -37,6 +37,7 @@ public class Funcionario {
 
 	public void setId_cargo(Integer id_cargo) {
 		this.id_cargo = id_cargo;
+
 	}
 
 	public Integer getId_filial() {
