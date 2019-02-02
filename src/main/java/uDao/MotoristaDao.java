@@ -3,6 +3,8 @@ package uDao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import JDBC.BaseDao;
 import entities.Motorista;
@@ -11,6 +13,43 @@ public class MotoristaDao extends BaseDao {
 
 	public MotoristaDao() {
 		super();
+	}
+
+	public Boolean deleteOne(Motorista m) throws SQLException {
+		String sql = "DELETE FROM motoristas WHERE id_motorista = ?;";
+
+		PreparedStatement ps = getConnection().prepareStatement(sql);
+
+		ps.setInt(1, m.getId_motorista());
+
+		return ps.executeUpdate() > 0;
+	}
+
+	public Boolean updateOne(Motorista m) throws SQLException {
+		String sql = "UPDATE motoristas SET nome = ?, cpf = ?, rg = ?, id_tipo_cnh = ? WHERE id_motorista = ?;";
+
+		PreparedStatement ps = getConnection().prepareStatement(sql);
+
+		ps.setString(1, m.getNome());
+		ps.setString(2, m.getCpf());
+		ps.setString(3, m.getRg());
+		ps.setInt(4, m.getTipo_cnh().getId());
+		ps.setInt(5, m.getId_motorista());
+
+		return ps.executeUpdate() > 0;
+	}
+
+	public Boolean insertOne(Motorista m) throws SQLException {
+		String sql = "INSERT INTO motoristas(nome, cpf, rg, id_tipo_cnh) VALUE (?, ?, ?, ?, ?);";
+
+		PreparedStatement ps = getConnection().prepareStatement(sql);
+
+		ps.setString(1, m.getNome());
+		ps.setString(2, m.getCpf());
+		ps.setString(3, m.getRg());
+		ps.setInt(4, m.getTipo_cnh().getId());
+
+		return ps.executeUpdate() > 0;
 	}
 
 	public Motorista findOne(Integer id_motorista) throws SQLException {
@@ -37,5 +76,29 @@ public class MotoristaDao extends BaseDao {
 		}
 
 		return m;
+	}
+
+	public List<Motorista> findAll() throws SQLException {
+		String sql = "SELECT * FROM motoristas AS m " + "INNER JOIN tipos_cnh AS ti ON ti.id_tipo_cnh = m.id_tipo_cnh;";
+
+		PreparedStatement ps = getConnection().prepareStatement(sql);
+
+		ResultSet rs = ps.executeQuery();
+
+		List<Motorista> motoristas = new ArrayList<>();
+
+		if (rs.next()) {
+			Motorista m = new Motorista();
+			m.setId_motorista(rs.getInt("id_motorista"));
+			m.setNome(rs.getString("nome"));
+			m.setCpf(rs.getString("cpf"));
+			m.setRg(rs.getString("rg"));
+			m.getTipo_cnh().setNome(rs.getString("ti.nome"));
+			m.getTipo_cnh().setId(rs.getInt("id_tipo_cnh"));
+
+			motoristas.add(m);
+		}
+
+		return motoristas;
 	}
 }
