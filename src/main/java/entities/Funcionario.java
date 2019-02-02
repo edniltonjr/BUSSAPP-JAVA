@@ -1,6 +1,7 @@
 package entities;
 
 public class Funcionario {
+
 	private Integer id_funcionario;
 	private String nome;
 	private String cpf;
