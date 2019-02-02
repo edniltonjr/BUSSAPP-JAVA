@@ -1,6 +1,5 @@
 package uDao;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,17 +9,15 @@ import entities.Motorista;
 
 public class MotoristaDao extends BaseDao {
 
-	private Connection con;
-
 	public MotoristaDao() {
 		super();
-		con = getConnection();
 	}
 
-	public Motorista buscaMotorista(Integer id_motorista) throws SQLException {
-		String sql = "SELECT * FROM motorista WHERE id_motorista = ?"; // String a ser executada
+	public Motorista findOne(Integer id_motorista) throws SQLException {
+		String sql = "SELECT * FROM motoristas AS m " + "INNER JOIN tipos_cnh AS ti ON ti.id_tipo_cnh = m.id_tipo_cnh "
+				+ "WHERE m.id_motorista = ?;"; // String a ser executada
 
-		PreparedStatement ps = con.prepareStatement(sql); // Preparar a string pra ligar os parametros
+		PreparedStatement ps = getConnection().prepareStatement(sql); // Preparar a string pra ligar os parametros
 
 		ps.setInt(1, id_motorista); // Escolher qual index de parametro, e depois qual o parametro em si
 
@@ -34,8 +31,9 @@ public class MotoristaDao extends BaseDao {
 			m.setNome(rs.getString("nome"));
 			m.setCpf(rs.getString("cpf"));
 			m.setRg(rs.getString("rg"));
-			m.setId_tipo_cnh(rs.getInt("id_tipo_cnh")); // se for informado a coluna incorreta ou inexistente, ocorrerá
-														// uma exceção
+			m.getTipo_cnh().setNome(rs.getString("ti.nome")); // se for informado a coluna incorreta ou inexistente,
+																// ocorrerá
+			m.getTipo_cnh().setId(rs.getInt("id_tipo_cnh")); // uma exceção
 		}
 
 		return m;

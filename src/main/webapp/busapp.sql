@@ -5,7 +5,7 @@ INSERT INTO tipo_cnh VALUE(0,"A");
 
 CREATE TABLE tipos_cnh(
 	id_tipo_cnh INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    descricao VARCHAR(100)
+    nome VARCHAR(100)
 );
 
 INSERT INTO motorista VALUE(0, "José Carlos", "46939417869", "524258430", 1);

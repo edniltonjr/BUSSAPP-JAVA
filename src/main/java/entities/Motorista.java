@@ -6,7 +6,11 @@ public class Motorista {
 	private String nome;
 	private String cpf;
 	private String rg;
-	private Integer id_tipo_cnh;
+	private ClasseGenerica tipo_cnh;
+
+	public Motorista() {
+		tipo_cnh = new ClasseGenerica();
+	}
 
 	public Integer getId_motorista() {
 		return id_motorista;
@@ -40,12 +44,12 @@ public class Motorista {
 		this.rg = rg;
 	}
 
-	public Integer getId_tipo_cnh() {
-		return id_tipo_cnh;
+	public ClasseGenerica getTipo_cnh() {
+		return tipo_cnh;
 	}
 
-	public void setId_tipo_cnh(Integer id_tipo_cnh) {
-		this.id_tipo_cnh = id_tipo_cnh;
+	public void setTipo_cnh(ClasseGenerica tipo_cnh) {
+		this.tipo_cnh = tipo_cnh;
 	}
 
 }
