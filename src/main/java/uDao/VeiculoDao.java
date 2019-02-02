@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import JDBC.BaseDao;
 import entities.Veiculo;
 
 public class VeiculoDao extends BaseDao {

@@ -1,9 +1,7 @@
-package uDao;
+package JDBC;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-
-import JDBC.ConnectionDB;
 
 public class BaseDao {
 
