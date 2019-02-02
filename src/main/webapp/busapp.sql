@@ -3,14 +3,14 @@ USE busapp;
 
 INSERT INTO tipo_cnh VALUE(0,"A");
 
-CREATE TABLE tipo_cnh(
+CREATE TABLE tipos_cnh(
 	id_tipo_cnh INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
     descricao VARCHAR(100)
 );
 
 INSERT INTO motorista VALUE(0, "José Carlos", "46939417869", "524258430", 1);
 
-CREATE TABLE motorista(
+CREATE TABLE motoristas(
 	id_motorista INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(200),
     cpf VARCHAR(15),
@@ -21,21 +21,21 @@ CREATE TABLE motorista(
 
 INSERT INTO cargo VALUE (0, "Motorista pleno 3");
 
-CREATE TABLE cargo(
+CREATE TABLE cargos(
 	id_cargo INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(200)
 );
 
 INSERT INTO filial value (0, "Filial 1");
 
-CREATE TABLE filial(
+CREATE TABLE filiais(
 	id_filial INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(200)
 );
 
 INSERT  INTO funcionario value (0, "Donizete Vida", "46939417869", 1, 1);
 
-CREATE TABLE funcionario(
+CREATE TABLE funcionarios(
 	id_funcionario INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT, 
     nome VARCHAR(200),
     cpf VARCHAr(15), 
@@ -47,7 +47,7 @@ CREATE TABLE funcionario(
 
 INSERT INTO veiculo value (0, "Peugeot 306", "EWA9023");
 
-CREATE TABLE veiculo(
+CREATE TABLE veiculos(
 	id_veiculo INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT, 
     modelo VARCHAR(200),
     placa CHAR(7)
@@ -55,7 +55,7 @@ CREATE TABLE veiculo(
 
 INSERT INTO viagem VALUE(0, 1, 1, "VTA", CURRENT_TIMESTAMP());
 
-CREATE TABLE viagem(
+CREATE TABLE viagens(
 	id_viagem INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
     id_motorista INTEGER NOT NULL,
     id_veiculo INTEGER NOT NULL,
@@ -70,7 +70,7 @@ INSERT INTO viagem_conteudo VALUE (2, 1);
 SELECT * FROM viagem_conteudo WHERE id_viagem = 2;
 
 
-CREATE TABLE viagem_conteudo(
+CREATE TABLE viagens_conteudo(
 	id_viagem INTEGER NOT NULL,
     id_funcionario INTEGER NOT NULL,
     FOREIGN KEY(id_viagem) REFERENCES viagem(id_viagem),
