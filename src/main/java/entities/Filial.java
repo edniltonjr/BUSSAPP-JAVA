@@ -3,6 +3,7 @@ package entities;
 public class Filial {
 
 	private Integer id_filial;
+
 	private String nome;
 
 	public Integer getId_filial() {

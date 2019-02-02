@@ -1,26 +1,13 @@
 <?xml version='1.0' encoding='ISO-8859-1' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/menu/template.xhtml" xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
-<h:head>
+	xmlns:f="http://java.sun.com/jsf/core">
+	<ui:define name="style">
 
-</h:head>
-<h:body>
-	<p:growl>
-		<p:autoUpdate />
-	</p:growl>
-	<h:form>
-		<h:outputLabel value="Teste" /> do jsf
-	<p:outputLabel value="Teste" /> do primefaces
-	
-	
-	
-	<h:button value="#{indexMBean.veiculo.placa}" /> 
-		<p:commandButton  />
+	</ui:define>
+	<ui:define name="conteudo">
 
-	</h:form>
-</h:body>
-</html>
+	</ui:define>
+</ui:composition>
