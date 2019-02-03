@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import JDBC.BaseDao;
+import entities.ClasseGenerica;
 import entities.Funcionario;
 
 public class FuncionarioDao extends BaseDao {
@@ -105,5 +106,59 @@ public class FuncionarioDao extends BaseDao {
 		}
 
 		return funcionarios;
+	}
+
+	public class FilialDao extends BaseDao {
+		public FilialDao() {
+			super();
+		}
+
+		public List<ClasseGenerica> findAll() throws SQLException {
+			String sql = "SELECT * FROM filiais;";
+
+			PreparedStatement ps = getConnection().prepareStatement(sql);
+
+			ResultSet rs = ps.executeQuery();
+
+			List<ClasseGenerica> filiais = new ArrayList<>();
+
+			while (rs.next()) {
+				ClasseGenerica filial = new ClasseGenerica();
+
+				filial.setId(rs.getInt("id_filial"));
+				filial.setNome(rs.getString("nome"));
+
+				filiais.add(filial);
+			}
+
+			return filiais;
+		}
+	}
+
+	public class CargoDao extends BaseDao {
+		public CargoDao() {
+			super();
+		}
+
+		public List<ClasseGenerica> findAll() throws SQLException {
+			String sql = "SELECT * FROM cargos;";
+
+			PreparedStatement ps = getConnection().prepareStatement(sql);
+
+			ResultSet rs = ps.executeQuery();
+
+			List<ClasseGenerica> cargos = new ArrayList<>();
+
+			while (rs.next()) {
+				ClasseGenerica cargo = new ClasseGenerica();
+
+				cargo.setId(rs.getInt("id_cargo"));
+				cargo.setNome(rs.getString("nome"));
+
+				cargos.add(cargo);
+			}
+
+			return cargos;
+		}
 	}
 }

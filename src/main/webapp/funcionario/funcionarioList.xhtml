@@ -1,0 +1,132 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<!DOCTYPE HTML>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/menu/template.xhtml" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:b="http://bootsfaces.net/ui">
+	<ui:define name="style">
+		<title>Funcionarios</title>
+
+		<style>
+.tableUpdated {
+	width: 90% !important;
+	margin: 17px 58px 0 !important;
+}
+
+.columnWidth {
+	width: 4% !important;
+}
+
+.btnSpace {
+	margin: 17px;
+}
+</style>
+	</ui:define>
+	<ui:define name="conteudo">
+		<center>
+			<h2>
+				<h:outputText value="Funcionarios" />
+			</h2>
+		</center>
+		<h:form id="funcionarioForm">
+			<h:dataTable id="funcionarioTable"
+				value="#{funcionarioList.funcionarios}" var="f"
+				class="table table-striped table-hover table-bordered tableUpdated">
+				<h:column>
+					<f:facet name="header">Id</f:facet>
+					<h:outputText value="#{f.id_funcionario}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Nome do Funcionario</f:facet>
+					<h:outputText value="#{f.nome}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">CPF</f:facet>
+					<h:outputText value="#{f.cpf}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Cargo</f:facet>
+					<h:outputText value="#{f.cargo.nome}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Filial</f:facet>
+					<h:outputText value="#{f.filial.nome}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Opções</f:facet>
+					<div class="btn btn-warning"></div>
+				</h:column>
+
+			</h:dataTable>
+			<center>
+				<p:commandButton ajax="true"
+					onclick="PF('funcionarioDialog').show();"
+					value="Criar novo funcionario" class="btn btn-success btnSpace" />
+			</center>
+		</h:form>
+		<p:dialog id="funcionarioDialog" header="Funcionario"
+			widgetVar="funcionarioDialog">
+			<h:form id="form" class="form-horizontal">
+				<div class="form-group">
+					<div class="col-sm-10"></div>
+					<h2 style="text-align: center" class="col-sm-10">Inserir ou
+						editar funcionario</h2>
+				</div>
+				<hr />
+				<div class="form-group">
+					<h:outputLabel for="nome" class="control-label col-sm-2">Nome:</h:outputLabel>
+					<div class="col-sm-9">
+						<b:inputText id="nome" value="#{funcionarioList.funcionario.nome}"
+							required="true" requiredMessage="O nome é necessário"
+							class="form-control" />
+					</div>
+				</div>
+				<div class="form-group">
+					<h:outputLabel for="cpf" class="control-label col-sm-2">CPF:</h:outputLabel>
+					<div class="col-sm-9">
+						<b:inputText id="cpf" value="#{funcionarioList.funcionario.cpf}"
+							required="true" requiredMessage="O cpf é necessário"
+							class="form-control" />
+					</div>
+				</div>
+
+				<div class="form-group">
+					<h:outputLabel for="filiais" class="control-label col-sm-2">Filial:</h:outputLabel>
+					<div class="col-sm-9">
+						<b:selectOneMenu value="#{funcionarioList.funcionario.filial.id}"
+							required="true" requiredMessage="Uma filial é necessária !">
+							<f:selectItem itemLabel="Selecione uma filial" itemValue="" />
+							<f:selectItems id="filiais" value="#{funcionarioList.filiais}"
+								var="f" itemValue="#{f.id}" itemLabel="#{f.nome}" />
+						</b:selectOneMenu>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<h:outputLabel for="cargos" class="control-label col-sm-2">Cargo:</h:outputLabel>
+					<div class="col-sm-9">
+						<b:selectOneMenu value="#{funcionarioList.funcionario.cargo.id}"
+							required="true" requiredMessage="Um cargo é necessário !">
+							<f:selectItem itemLabel="Selecione um cargo" itemValue="" />
+							<f:selectItems id="cargos" value="#{funcionarioList.cargos}"
+								var="c" itemValue="#{c.id}" itemLabel="#{c.nome}" />
+						</b:selectOneMenu>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="col-sm-2"></div>
+					<div class="col-sm-4">
+						<p:commandButton value="Inserir funcionario" ajax="true"
+							update=":funcionarioForm:funcionarioTable"
+							listener="#{funcionarioList.findAll}"
+							class="btn btn-primary updateBtnStyle"
+							oncomplete="PF('funcionarioDialog').hide();"
+							actionListener="#{funcionarioList.inserirFuncionario}" />
+					</div>
+				</div>
+			</h:form>
+		</p:dialog>
+	</ui:define>
+</ui:composition>
