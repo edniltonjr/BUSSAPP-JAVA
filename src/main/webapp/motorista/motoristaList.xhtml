@@ -1,15 +1,13 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
 <!DOCTYPE HTML>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/menu/template.xhtml" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+	<ui:define name="style">
+		<title>Motoristas</title>
 
-<h:head>
-	<meta charset="utf-8" name="viewport"
-		content="width=device-width, initial-scale=1"
-		http-equiv="X-UA-Conpatible" />
-	<h:outputStylesheet library="css" name="bootstrap.min.css" />
-	<title>JSF CRUD Example</title>
-	<style type="text/css">
+		<style>
 .tableUpdated {
 	width: 90% !important;
 	margin: 17px 58px 0 !important;
@@ -19,43 +17,109 @@
 	margin: 17px;
 }
 </style>
-</h:head>
-<h:body>
-	<center>
-		<h2>
-			<h:outputText value="Motoristas" />
-		</h2>
-	</center>
-	<h:form id="motoristaForm">
-		<h:dataTable id="motoristaTable" value="#{motoristaList.motoristas}"
-			var="m"
-			class="table table-striped table-hover table-bordered tableUpdated">
-			<h:column>
-				<f:facet name="header">Id</f:facet>
-				<h:outputText value="#{m.id_motorista}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">Nome</f:facet>
-				<h:outputText value="#{m.nome}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">CPF</f:facet>
-				<h:outputText value="#{m.cpf}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">RG</f:facet>
-				<h:outputText value="#{m.rg}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">CNH</f:facet>
-				<h:outputText value="#{m.tipo_cnh.nome}" />
-			</h:column>
-
-		</h:dataTable>
+	</ui:define>
+	<ui:define name="conteudo">
 		<center>
-			<h:commandButton value="Criar novo motorista"
-				class="btn btn-success btnSpace" />
+			<h2>
+				<h:outputText value="Motoristas" />
+			</h2>
 		</center>
-	</h:form>
-</h:body>
-</html>
+		<h:form id="motoristaForm">
+			<h:dataTable id="motoristaTable" value="#{motoristaList.motoristas}"
+				var="m"
+				class="table table-striped table-hover table-bordered tableUpdated">
+				<h:column>
+					<f:facet name="header">Id</f:facet>
+					<h:outputText value="#{m.id_motorista}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Nome</f:facet>
+					<h:outputText value="#{m.nome}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">CPF</f:facet>
+					<h:outputText value="#{m.cpf}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">RG</f:facet>
+					<h:outputText value="#{m.rg}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">CNH</f:facet>
+					<h:outputText value="#{m.tipo_cnh.nome}" />
+				</h:column>
+
+			</h:dataTable>
+			<center>
+				<p:commandButton value="Criar novo motorista"
+					class="btn btn-success btnSpace"
+					onclick="PF('createMotorista').show();" />
+			</center>
+		</h:form>
+
+		<p:dialog widgetVar="createMotorista">
+			<h:form id="form" class="form-horizontal">
+				<div class="form-group">
+					<div class="col-sm-2"></div>
+					<h2 style="text-align: center" class="col-sm-4">Editar
+						motorista</h2>
+
+				</div>
+				<hr />
+				<div class="form-group">
+					<h:outputLabel for="nome" class="control-label col-sm-2">Nome:</h:outputLabel>
+					<div class="col-sm-4">
+						<h:inputText id="nome" required="true"
+							requiredMessage="O nome é necessário"
+							value="#{motoristaList.motorista.nome}" class="form-control" />
+					</div>
+				</div>
+				<div class="form-group">
+					<h:outputLabel for="cpf" class="control-label col-sm-2">CPF: </h:outputLabel>
+					<div class="col-sm-4">
+						<h:inputText id="cpf" required="true"
+							requiredMessage="O cpf é necessário"
+							value="#{motoristaList.motorista.cpf}" class="form-control" />
+					</div>
+				</div>
+
+				<div class="form-group">
+					<h:outputLabel for="rg" class="control-label col-sm-2">RG: </h:outputLabel>
+					<div class="col-sm-4">
+						<h:inputText id="rg" required="true"
+							requiredMessage="O rg é necessário"
+							value="#{motoristaList.motorista.rg}" class="form-control" />
+					</div>
+				</div>
+				<div class="form-group">
+					<h:outputLabel for="password" class="control-label col-sm-2">CNH: </h:outputLabel>
+					<div class="col-sm-4">
+						<h:selectOneMenu value="#{motoristaList.motorista.tipo_cnh.id}"
+							required="true"
+							requiredMessage="Uma categoria de CNH é necessária">
+							<f:selectItem itemLabel="Selecione uma categoria" itemValue="" />
+							<f:selectItems value="#{motoristaList.cnhs}" var="cnh"
+								itemLabel="#{cnh.nome}" itemDescription="#{cnh.nome}"
+								itemValue="#{cnh.id}" />
+						</h:selectOneMenu>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="col-sm-2"></div>
+					<div class="col-sm-4">
+						<p:commandButton value="Inserir motorista"
+							actionListener="#{motoristaList.insertMotorista}" ajax="true"
+							update=":motoristaForm:motoristaTable"
+							listener="#{motoristaList.findAll}"
+							class="btn btn-primary updateBtnStyle"
+							oncomplete="PF('createMotorista').hide();" />
+					</div>
+				</div>
+			</h:form>
+		</p:dialog>
+
+
+
+	</ui:define>
+</ui:composition>

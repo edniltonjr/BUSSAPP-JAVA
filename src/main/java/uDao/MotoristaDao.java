@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import JDBC.BaseDao;
+import entities.ClasseGenerica;
 import entities.Motorista;
 
 public class MotoristaDao extends BaseDao {
@@ -40,7 +41,7 @@ public class MotoristaDao extends BaseDao {
 	}
 
 	public Boolean insertOne(Motorista m) throws SQLException {
-		String sql = "INSERT INTO motoristas(nome, cpf, rg, id_tipo_cnh) VALUE (?, ?, ?, ?, ?);";
+		String sql = "INSERT INTO motoristas(nome, cpf, rg, id_tipo_cnh) VALUE (?, ?, ?, ?);";
 
 		PreparedStatement ps = getConnection().prepareStatement(sql);
 
@@ -87,7 +88,7 @@ public class MotoristaDao extends BaseDao {
 
 		List<Motorista> motoristas = new ArrayList<>();
 
-		if (rs.next()) {
+		while (rs.next()) {
 			Motorista m = new Motorista();
 			m.setId_motorista(rs.getInt("id_motorista"));
 			m.setNome(rs.getString("nome"));
@@ -100,5 +101,53 @@ public class MotoristaDao extends BaseDao {
 		}
 
 		return motoristas;
+	}
+
+	public class CnhDao extends BaseDao {
+		public CnhDao() {
+			super();
+		}
+
+		public List<ClasseGenerica> findAll() throws SQLException {
+			String sql = "SELECT * FROM tipos_cnh;";
+
+			PreparedStatement ps = getConnection().prepareStatement(sql);
+
+			ResultSet rs = ps.executeQuery();
+
+			List<ClasseGenerica> cnhs = new ArrayList<>();
+
+			while (rs.next()) {
+				ClasseGenerica cnh = new ClasseGenerica();
+
+				cnh.setId(rs.getInt("id_tipo_cnh"));
+				cnh.setNome(rs.getString("nome"));
+
+				cnhs.add(cnh);
+			}
+
+			return cnhs;
+		}
+
+		public Boolean insertOne(ClasseGenerica cnh) throws SQLException {
+			String sql = "INSERT INTO tipos_cnh(nome) VALUE (?);";
+
+			PreparedStatement ps = getConnection().prepareStatement(sql);
+
+			ps.setString(1, cnh.getNome());
+
+			return ps.executeUpdate() > 0;
+		}
+
+		public Boolean updateOne(ClasseGenerica cnh) throws SQLException {
+			String sql = "UPDATE tipos_cnh SET nome = ? WHERE id_tipo_cnh = ?;";
+
+			PreparedStatement ps = getConnection().prepareStatement(sql);
+
+			ps.setString(1, cnh.getNome());
+			ps.setInt(2, cnh.getId());
+
+			return ps.executeUpdate() > 0;
+		}
 	}
 }

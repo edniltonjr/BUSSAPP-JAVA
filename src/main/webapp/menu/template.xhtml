@@ -1,12 +1,18 @@
-<?xml version='1.0' encoding='ISO-8859-1' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE HTML>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
-	<ui:insert name="style"></ui:insert>
+	<h:outputStylesheet library="css" name="bootstrap.min.css" />
+	<meta charset="utf-8" name="viewport"
+		content="width=device-width, initial-scale=1"
+		http-equiv="X-UA-Conpatible" />
+	<ui:insert name="style">
+
+	</ui:insert>
 </h:head>
 <h:body>
 	<center>
@@ -15,16 +21,21 @@
 	</center>
 	<h:form>
 		<p:menubar>
+			<p:menuitem value="Inicio" url="/" icon="fa fa-home" />
 			<p:submenu label="Motorista" icon="fa fa-car">
-				<p:menuitem value="Visualizar motoristas" />
+				<p:menuitem value="Visualizar motoristas"
+					url="/motorista/motoristaList.xhtml" />
 			</p:submenu>
 			<f:facet name="options">
-				<p:commandButton value="Sair" icon="fa fa-home" />
+				<p:commandButton value="Sair" icon="ui-icon-extlink" />
 			</f:facet>
 		</p:menubar>
 
 	</h:form>
 	<div>
+		<p:growl widgetVar="growl">
+			<p:autoUpdate />
+		</p:growl>
 		<ui:insert name="conteudo">
 		</ui:insert>
 	</div>
