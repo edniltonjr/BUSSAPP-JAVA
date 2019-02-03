@@ -48,6 +48,14 @@
 					<f:facet name="header">CNH</f:facet>
 					<h:outputText value="#{m.tipo_cnh.nome}" />
 				</h:column>
+				<h:column width="4%">
+					<f:facet name="header">Editar</f:facet>
+					<p:commandLink onclick="PF('createMotorista').show();"
+						value="Editar" class="btn btn-warning" ajax="true" update=":form">
+						<f:setPropertyActionListener value="#{m}"
+							target="#{motoristaList.motorista}" />
+					</p:commandLink>
+				</h:column>
 
 			</h:dataTable>
 			<center>
