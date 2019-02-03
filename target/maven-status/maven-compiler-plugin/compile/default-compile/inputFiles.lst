@@ -1,4 +1,6 @@
 C:\Users\Junior Santos\eclipse-workspace\BUSSAPP\src\main\java\util\Mensagem.java
+C:\Users\Junior Santos\eclipse-workspace\BUSSAPP\src\main\java\entities\Cargo.java
+C:\Users\Junior Santos\eclipse-workspace\BUSSAPP\src\main\java\entities\TipoCNH.java
 C:\Users\Junior Santos\eclipse-workspace\BUSSAPP\src\main\java\uDao\MotoristaDao.java
 C:\Users\Junior Santos\eclipse-workspace\BUSSAPP\src\main\java\entities\Veiculo.java
 C:\Users\Junior Santos\eclipse-workspace\BUSSAPP\src\main\java\mbeans\IndexMBean.java
@@ -10,4 +12,6 @@ C:\Users\Junior Santos\eclipse-workspace\BUSSAPP\src\main\java\JDBC\ConnectionDB
 C:\Users\Junior Santos\eclipse-workspace\BUSSAPP\src\main\java\uDao\FuncionarioDao.java
 C:\Users\Junior Santos\eclipse-workspace\BUSSAPP\src\main\java\uDao\VeiculoDao.java
 C:\Users\Junior Santos\eclipse-workspace\BUSSAPP\src\main\java\entities\ClasseGenerica.java
+C:\Users\Junior Santos\eclipse-workspace\BUSSAPP\src\main\java\entities\Filial.java
 C:\Users\Junior Santos\eclipse-workspace\BUSSAPP\src\main\java\entities\Funcionario.java
+C:\Users\Junior Santos\eclipse-workspace\BUSSAPP\src\main\java\entities\ViagemConteudo.java
