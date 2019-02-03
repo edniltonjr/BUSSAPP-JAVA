@@ -71,6 +71,14 @@ public class MotoristaList {
 
 	}
 
+	public void updateOrInsert() {
+		if (motorista.getId_motorista() == null) {
+			insertMotorista();
+		} else {
+			updateMotorista();
+		}
+	}
+
 	public Motorista getMotorista() {
 		return motorista;
 	}
