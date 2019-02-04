@@ -3,7 +3,8 @@
 <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
 	template="/menu/template.xhtml" xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:b="http://bootsfaces.net/ui">
 	<ui:define name="style">
 		<title>Motoristas</title>
 
@@ -69,27 +70,27 @@
 			</center>
 		</h:form>
 
-		<p:dialog widgetVar="createMotorista">
+		<p:dialog widgetVar="createMotorista" width="50%">
 			<h:form id="form" class="form-horizontal">
 				<div class="form-group">
 					<div class="col-sm-2"></div>
-					<h2 style="text-align: center" class="col-sm-4">Editar
-						motorista</h2>
+					<h2 style="text-align: center" class="col-sm-4">Inserir ou
+						editar motorista</h2>
 
 				</div>
 				<hr />
 				<div class="form-group">
 					<h:outputLabel for="nome" class="control-label col-sm-2">Nome:</h:outputLabel>
-					<div class="col-sm-10">
-						<h:inputText id="nome" required="true"
+					<div class="col-sm-9">
+						<b:inputText id="nome" required="true"
 							requiredMessage="O nome é necessário"
 							value="#{motoristaList.motorista.nome}" class="form-control" />
 					</div>
 				</div>
 				<div class="form-group">
 					<h:outputLabel for="cpf" class="control-label col-sm-2">CPF: </h:outputLabel>
-					<div class="col-sm-10">
-						<h:inputText id="cpf" required="true"
+					<div class="col-sm-9">
+						<b:inputText id="cpf" required="true"
 							requiredMessage="O cpf é necessário"
 							value="#{motoristaList.motorista.cpf}" class="form-control" />
 					</div>
@@ -97,30 +98,30 @@
 
 				<div class="form-group">
 					<h:outputLabel for="rg" class="control-label col-sm-2">RG: </h:outputLabel>
-					<div class="col-sm-10">
-						<h:inputText id="rg" required="true"
+					<div class="col-sm-9">
+						<b:inputText id="rg" required="true"
 							requiredMessage="O rg é necessário"
 							value="#{motoristaList.motorista.rg}" class="form-control" />
 					</div>
 				</div>
 				<div class="form-group">
 					<h:outputLabel for="password" class="control-label col-sm-2">CNH: </h:outputLabel>
-					<div class="col-sm-10">
-						<h:selectOneMenu value="#{motoristaList.motorista.tipo_cnh.id}"
+					<div class="col-sm-9">
+						<b:selectOneMenu value="#{motoristaList.motorista.tipo_cnh.id}"
 							required="true"
 							requiredMessage="Uma categoria de CNH é necessária">
 							<f:selectItem itemLabel="Selecione uma categoria" itemValue="" />
 							<f:selectItems value="#{motoristaList.cnhs}" var="cnh"
 								itemLabel="#{cnh.nome}" itemDescription="#{cnh.nome}"
 								itemValue="#{cnh.id}" />
-						</h:selectOneMenu>
+						</b:selectOneMenu>
 					</div>
 				</div>
 
 				<div class="form-group">
 					<div class="col-sm-2"></div>
 					<div class="col-sm-4">
-						<p:commandButton value="Inserir motorista"
+						<b:commandButton value="Inserir motorista"
 							actionListener="#{motoristaList.updateOrInsert}" ajax="true"
 							update=":motoristaForm:motoristaTable :form"
 							listener="#{motoristaList.findAll}"

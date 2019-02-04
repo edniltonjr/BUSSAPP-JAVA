@@ -55,7 +55,12 @@
 				</h:column>
 				<h:column>
 					<f:facet name="header">Opções</f:facet>
-					<div class="btn btn-warning"></div>
+					<p:commandLink value="Editar" class="btn btn-warning"
+						onclick="PF('funcionarioDialog').show();" ajax="true"
+						update=":form">
+						<f:setPropertyActionListener value="#{f}"
+							target="#{funcionarioList.funcionario}" />
+					</p:commandLink>
 				</h:column>
 
 			</h:dataTable>
@@ -65,7 +70,7 @@
 					value="Criar novo funcionario" class="btn btn-success btnSpace" />
 			</center>
 		</h:form>
-		<p:dialog id="funcionarioDialog" header="Funcionario"
+		<p:dialog width="50%" id="funcionarioDialog" header="Funcionario"
 			widgetVar="funcionarioDialog">
 			<h:form id="form" class="form-horizontal">
 				<div class="form-group">
@@ -118,12 +123,12 @@
 				<div class="form-group">
 					<div class="col-sm-2"></div>
 					<div class="col-sm-4">
-						<p:commandButton value="Inserir funcionario" ajax="true"
+						<b:commandButton value="Inserir funcionario" ajax="true"
 							update=":funcionarioForm:funcionarioTable"
 							listener="#{funcionarioList.findAll}"
 							class="btn btn-primary updateBtnStyle"
 							oncomplete="PF('funcionarioDialog').hide();"
-							actionListener="#{funcionarioList.inserirFuncionario}" />
+							actionListener="#{funcionarioList.updateOrInsert}" />
 					</div>
 				</div>
 			</h:form>

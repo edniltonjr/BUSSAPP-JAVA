@@ -44,6 +44,7 @@ public class FuncionarioList {
 			funcionarios = funcionarioDao.findAll();
 			cargos = cargoDao.findAll();
 			filiais = filialDao.findAll();
+			funcionario = new Funcionario();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -61,6 +62,26 @@ public class FuncionarioList {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			Mensagem.Make(e.toString());
+		}
+	}
+
+	public void updateFuncionario() {
+		try {
+			if (funcionarioDao.updateOne(funcionario)) {
+				Mensagem.Make("Funcionario atualizado com sucesso !");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Mensagem.Make(e.toString());
+		}
+	}
+
+	public void updateOrInsert() {
+		if (funcionario.getId_funcionario() == null) {
+			inserirFuncionario();
+		} else {
+			updateFuncionario();
 		}
 	}
 
