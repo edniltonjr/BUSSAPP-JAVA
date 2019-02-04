@@ -1,0 +1,151 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<!DOCTYPE HTML>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/menu/template.xhtml" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:b="http://bootsfaces.net/ui">
+	<ui:define name="style">
+		<title>Viagens</title>
+
+		<style>
+.tableUpdated {
+	width: 90% !important;
+	margin: 17px 58px 0 !important;
+}
+
+.columnWidth {
+	width: 4% !important;
+}
+
+.btnSpace {
+	margin: 17px;
+}
+</style>
+	</ui:define>
+	<ui:define name="conteudo">
+		<center>
+			<h2>
+				<h:outputText value="Viagens" />
+			</h2>
+		</center>
+		<h:form id="viagemForm">
+			<h:dataTable id="viagemTable" value="#{viagemList.viagens}" var="v"
+				class="table table-dark table-striped table-hover table-bordered tableUpdated">
+				<h:column>
+					<f:facet name="header">Id</f:facet>
+					<h:outputText value="#{v.id_viagem}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Nome motorista</f:facet>
+					<h:outputText value="#{v.motorista.nome}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Nome veiculo</f:facet>
+					<h:outputText value="#{v.veiculo.nome}" />
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Tipo de viagem</f:facet>
+					<h:outputText value="#{v.tipo_viagem}" />
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Data da viagem</f:facet>
+					<h:outputText value="#{v.data_viagem.time}">
+						<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+					</h:outputText>
+				</h:column>
+
+				<p:column>
+					<f:facet name="header">Opções</f:facet>
+
+					<p:commandLink oncomplete="PF('createViagem').show();"
+						value="Editar" class="btn btn-warning" ajax="true" update=":form">
+						<f:setPropertyActionListener value="#{v}"
+							target="#{viagemList.viagem}" />
+					</p:commandLink>
+				</p:column>
+
+			</h:dataTable>
+			<center>
+				<p:commandButton value="Criar nova viagem"
+					class="btn btn-success btnSpace"
+					onclick="PF('createViagem').show();" />
+			</center>
+		</h:form>
+
+		<p:dialog widgetVar="createViagem" width="50%" resizable="false">
+			<h:form id="form" class="form-horizontal">
+				<div class="form-group">
+					<div class="col-sm-2"></div>
+					<h2 style="text-align: center" class="col-sm-4">Inserir ou
+						editar viagem</h2>
+
+				</div>
+				<hr />
+				<div class="form-group">
+					<h:outputLabel for="modelo" class="control-label col-sm-2">Motorista:</h:outputLabel>
+					<div class="col-sm-9">
+						<b:selectOneMenu value="#{viagemList.viagem.motorista.id}"
+							required="true" requiredMessage="Um motorista é necessário !">
+							<f:selectItem itemLabel="Selecione um motorista" itemValue="" />
+
+							<f:selectItems value="#{viagemList.motoristas}" var="m"
+								itemLabel="#{m.nome}" itemValue="#{m.id_motorista}" />
+						</b:selectOneMenu>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<h:outputLabel for="modelo" class="control-label col-sm-2">Veiculo:</h:outputLabel>
+					<div class="col-sm-9">
+						<b:selectOneMenu value="#{viagemList.viagem.veiculo.id}"
+							required="true" requiredMessage="Um veiculo é necessário !">
+							<f:selectItem itemLabel="Selecione um veiculo" itemValue="" />
+
+							<f:selectItems value="#{viagemList.veiculos}" var="v"
+								itemLabel="#{v.modelo}" itemValue="#{v.id_veiculo}" />
+						</b:selectOneMenu>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<h:outputLabel for="modelo" class="control-label col-sm-2">Tipo da viagem:</h:outputLabel>
+					<div class="col-sm-9">
+						<b:selectOneMenu value="#{viagemList.viagem.tipo_viagem}"
+							required="true"
+							requiredMessage="Um tipo de viagem é necessário !">
+							<f:selectItem itemLabel="Selecione um tipo de viagem"
+								itemValue="" />
+							<f:selectItem itemLabel="Viagem de ida" itemValue="IDA" />
+							<f:selectItem itemLabel="Viagem de volta" itemValue="VTA" />
+						</b:selectOneMenu>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<h:outputLabel for="modelo" class="control-label col-sm-2">Data da viagem:</h:outputLabel>
+					<div class="col-sm-9">
+						<p:calendar value="#{viagemList.viagem.data_viagem.time}"
+							pattern="dd/MM/yyyy HH:mm:ss" />
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="col-sm-2"></div>
+					<div class="col-sm-4">
+						<b:commandButton value="Inserir viagem"
+							actionListener="#{viagemList.updateOrInsert}" ajax="true"
+							update=":viagemForm:viagemTable :form"
+							class="btn btn-primary updateBtnStyle"
+							oncomplete="PF('createViagem').hide();" />
+					</div>
+				</div>
+			</h:form>
+		</p:dialog>
+
+
+
+	</ui:define>
+</ui:composition>

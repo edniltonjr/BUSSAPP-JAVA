@@ -48,7 +48,7 @@ public class ViagemDao extends BaseDao {
 
 	public List<Viagem> findAll() throws SQLException {
 		String sql = "SELECT * FROM viagens AS v " + "INNER JOIN motoristas AS m ON m.id_motorista = v.id_motorista "
-				+ "INNER JOIN veiculos AS ve ON ve.id_veiculo = v.id_veiculo;";
+				+ "INNER JOIN veiculos AS ve ON ve.id_veiculo = v.id_veiculo ORDER BY v.id_viagem;";
 
 		PreparedStatement ps = getConnection().prepareStatement(sql);
 
@@ -62,7 +62,7 @@ public class ViagemDao extends BaseDao {
 			v.setId_viagem(rs.getInt("id_viagem"));
 			v.getMotorista().setNome(rs.getString("m.nome"));
 			v.getMotorista().setId(rs.getInt("id_motorista"));
-			v.getVeiculo().setNome(rs.getString("ve.nome"));
+			v.getVeiculo().setNome(rs.getString("ve.modelo"));
 			v.getVeiculo().setId(rs.getInt("id_veiculo"));
 			v.setTipo_viagem(rs.getString("tipo_viagem"));
 
@@ -71,6 +71,7 @@ public class ViagemDao extends BaseDao {
 			c.setTimeInMillis(t.getTime());
 			v.setData_viagem(c);
 
+			viagens.add(v);
 		}
 
 		return viagens;
