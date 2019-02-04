@@ -7,26 +7,30 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import entities.Motorista;
 import entities.Veiculo;
 import uDao.VeiculoDao;
 import util.Mensagem;
+
+
 
 @ManagedBean
 @ViewScoped
 
 public class VeiculoList {
-
-	private VeiculoDao veiculoDao;
+	
+	private VeiculoDao veiculoDao; 
 	private List<Veiculo> veiculos;
 	private Veiculo veiculo;
-
+	
+	
 	public VeiculoList() {
 		veiculoDao = new VeiculoDao();
 		veiculo = new Veiculo();
 		veiculos = new ArrayList<>();
 		findAll();
 	}
-
+	
 	public void insertVeiculo() {
 		try {
 			if (veiculoDao.insertOne(veiculo)) {
@@ -38,9 +42,9 @@ public class VeiculoList {
 			e.printStackTrace();
 			Mensagem.Make(e.toString());
 		}
-
+		
 	}
-
+	
 	public void updateVeiculo() {
 		try {
 			if (veiculoDao.updateOne(veiculo)) {
@@ -54,7 +58,8 @@ public class VeiculoList {
 		}
 	}
 
-	public void findAll() {
+
+	private void findAll() {
 		try {
 			veiculos = veiculoDao.findAll();
 			veiculo = new Veiculo();
@@ -64,7 +69,7 @@ public class VeiculoList {
 			Mensagem.Make(e.toString());
 		}
 	}
-
+	
 	public void updateOrInsert() {
 		if (veiculo.getId_veiculo() == null) {
 			insertVeiculo();
@@ -72,6 +77,7 @@ public class VeiculoList {
 			updateVeiculo();
 		}
 	}
+	
 
 	public VeiculoDao getVeiculoDao() {
 		return veiculoDao;
@@ -96,5 +102,7 @@ public class VeiculoList {
 	public void setVeiculo(Veiculo veiculo) {
 		this.veiculo = veiculo;
 	}
+	
+	
 
 }
