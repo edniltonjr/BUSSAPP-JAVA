@@ -45,10 +45,10 @@ public class VeiculoList {
 		
 	}
 	
-	public void updateMotorista() {
+	public void updateVeiculo() {
 		try {
 			if (veiculoDao.updateOne(veiculo)) {
-				Mensagem.Make("Motorista atualizado com sucesso !");
+				Mensagem.Make("Veiculo atualizado com sucesso !");
 				findAll();
 			}
 		} catch (SQLException e) {
@@ -67,6 +67,14 @@ public class VeiculoList {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			Mensagem.Make(e.toString());
+		}
+	}
+	
+	public void updateOrInsert() {
+		if (veiculo.getId_veiculo() == null) {
+			insertVeiculo();
+		} else {
+			updateVeiculo();
 		}
 	}
 	
