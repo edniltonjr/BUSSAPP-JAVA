@@ -160,5 +160,26 @@ public class FuncionarioDao extends BaseDao {
 
 			return cargos;
 		}
+
+		public Boolean insertOne(ClasseGenerica classeGenerica) throws SQLException {
+			String sql = "INSERT INTO cargos(nome) VALUE (?);";
+
+			PreparedStatement ps = getConnection().prepareStatement(sql);
+
+			ps.setString(1, classeGenerica.getNome());
+
+			return ps.executeUpdate() > 0;
+		}
+
+		public Boolean updateOne(ClasseGenerica classeGenerica) throws SQLException {
+			String sql = "UPDATE cargos SET nome = ? WHERE id_cargo = ?;";
+
+			PreparedStatement ps = getConnection().prepareStatement(sql);
+
+			ps.setString(1, classeGenerica.getNome());
+			ps.setInt(2, classeGenerica.getId());
+
+			return ps.executeUpdate() > 0;
+		}
 	}
 }

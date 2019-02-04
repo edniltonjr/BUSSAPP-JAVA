@@ -22,17 +22,21 @@
 	<h:form>
 		<p:menubar>
 			<p:menuitem value="Inicio" url="/" icon="fa fa-home" />
+
 			<p:submenu label="Motorista" icon="fa fa-car">
 				<p:menuitem value="Visualizar motoristas"
 					url="/motorista/motoristaList.xhtml" />
+
 			</p:submenu>
-			
-						<p:submenu label="Funcionario" icon="fa fa-user">
+
+			<p:submenu label="Funcionario" icon="fa fa-user">
 				<p:menuitem value="Visualizar funcionarios"
 					url="/funcionario/funcionarioList.xhtml" />
+				<p:menuitem value="Visualizar cargos"
+					url="/funcionario/cargoList.xhtml" />
 			</p:submenu>
-			
-						<p:submenu label="Veiculo" icon="fa fa-car">
+
+			<p:submenu label="Veiculo" icon="fa fa-car">
 				<p:menuitem value="Visualizar veiculos"
 					url="/veiculo/veiculoList.xhtml" />
 			</p:submenu>
