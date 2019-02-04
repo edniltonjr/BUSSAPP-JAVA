@@ -44,6 +44,7 @@
 				<h:column>
 					<f:facet name="header">CPF</f:facet>
 					<h:outputText value="#{f.cpf}" />
+					
 				</h:column>
 				<h:column>
 					<f:facet name="header">Cargo</f:facet>
@@ -90,9 +91,11 @@
 				<div class="form-group">
 					<h:outputLabel for="cpf" class="control-label col-sm-2">CPF:</h:outputLabel>
 					<div class="col-sm-9">
-						<b:inputText id="cpf" value="#{funcionarioList.funcionario.cpf}"
+						<b:inputText id="cpf" mask="999.999.999-99" value="#{funcionarioList.funcionario.cpf}"
 							required="true" requiredMessage="O cpf é necessário"
 							class="form-control" />
+                        
+                        
 					</div>
 				</div>
 
