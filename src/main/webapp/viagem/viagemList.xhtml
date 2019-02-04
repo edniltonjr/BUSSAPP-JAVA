@@ -127,8 +127,10 @@
 				<div class="form-group">
 					<h:outputLabel for="modelo" class="control-label col-sm-2">Data da viagem:</h:outputLabel>
 					<div class="col-sm-9">
-						<p:calendar value="#{viagemList.viagem.data_viagem.time}"
-							pattern="dd/MM/yyyy HH:mm:ss" />
+						<!-- <p:calendar value="#{viagemList.viagem.data_viagem.time}"
+							pattern="dd/MM/yyyy HH:mm:ss" /> -->
+
+						<b:dateTimePicker value="#{viagemList.viagem.data_viagem.time}" />
 					</div>
 				</div>
 

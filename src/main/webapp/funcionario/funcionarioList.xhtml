@@ -124,8 +124,7 @@
 					<div class="col-sm-2"></div>
 					<div class="col-sm-4">
 						<b:commandButton value="Inserir funcionario" ajax="true"
-							update=":funcionarioForm:funcionarioTable"
-							listener="#{funcionarioList.findAll}"
+							update=":funcionarioForm:funcionarioTable :form"
 							class="btn btn-primary updateBtnStyle"
 							oncomplete="PF('funcionarioDialog').hide();"
 							actionListener="#{funcionarioList.updateOrInsert}" />

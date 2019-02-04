@@ -25,6 +25,7 @@ public class ViagemDao extends BaseDao {
 		ps.setInt(1, v.getMotorista().getId());
 		ps.setInt(2, v.getVeiculo().getId());
 		ps.setString(3, v.getTipo_viagem());
+		errorCalendar(v.getData_viagem());
 		Timestamp timestamp = new Timestamp(v.getData_viagem().getTimeInMillis());
 		ps.setTimestamp(4, timestamp);
 
@@ -39,6 +40,7 @@ public class ViagemDao extends BaseDao {
 		ps.setInt(1, v.getMotorista().getId());
 		ps.setInt(2, v.getVeiculo().getId());
 		ps.setString(3, v.getTipo_viagem());
+		errorCalendar(v.getData_viagem());
 		Timestamp timestamp = new Timestamp(v.getData_viagem().getTimeInMillis());
 		ps.setTimestamp(4, timestamp);
 		ps.setInt(5, v.getId_viagem());
@@ -75,6 +77,10 @@ public class ViagemDao extends BaseDao {
 		}
 
 		return viagens;
+	}
+
+	private void errorCalendar(Calendar c) {
+		c.set(Calendar.HOUR, c.get(Calendar.HOUR) - 2);
 	}
 
 }

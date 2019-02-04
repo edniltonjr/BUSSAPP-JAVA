@@ -55,8 +55,9 @@ public class FuncionarioList {
 	public void inserirFuncionario() {
 		try {
 			if (funcionarioDao.insertOne(funcionario)) {
-				findAll();
 				Mensagem.Make("Funcionario inserido com sucesso !");
+				findAll();
+
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -69,6 +70,7 @@ public class FuncionarioList {
 		try {
 			if (funcionarioDao.updateOne(funcionario)) {
 				Mensagem.Make("Funcionario atualizado com sucesso !");
+				findAll();
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
