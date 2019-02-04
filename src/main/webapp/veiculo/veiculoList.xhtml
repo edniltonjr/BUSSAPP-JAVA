@@ -3,7 +3,8 @@
 <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
 	template="/menu/template.xhtml" xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:b="http://bootsfaces.net/ui">
 	<ui:define name="style">
 		<title>Veiculos</title>
 
@@ -47,8 +48,8 @@
 
 				<p:column>
 					<f:facet name="header">Opções</f:facet>
-					<p:commandLink onclick="PF('createVeiculo').show();"
-						value="Editar" class="btn btn-warning" ajax="true" update=":form">
+					<p:commandLink onclick="PF('createVeiculo').show();" value="Editar"
+						class="btn btn-warning" ajax="true" update=":form">
 						<f:setPropertyActionListener value="#{m}"
 							target="#{veiculoList.veiculo}" />
 					</p:commandLink>
@@ -62,27 +63,26 @@
 			</center>
 		</h:form>
 
-		<p:dialog widgetVar="createVeiculo">
+		<p:dialog widgetVar="createVeiculo" width="50%" resizable="false">
 			<h:form id="form" class="form-horizontal">
 				<div class="form-group">
 					<div class="col-sm-2"></div>
-					<h2 style="text-align: center" class="col-sm-4">Editar
-						Veiculo</h2>
+					<h2 style="text-align: center" class="col-sm-4">Editar Veiculo</h2>
 
 				</div>
 				<hr />
 				<div class="form-group">
-					<h:outputLabel for="modelo" class="control-label col-sm-2">Modelo:</h:outputLabel>
-					<div class="col-sm-10">
-						<h:inputText id="modelo" required="true"
+					<h:outputLabel for="modelo" class="control-label col-sm-2">Modelo: </h:outputLabel>
+					<div class="col-sm-9">
+						<b:inputText id="modelo" required="true"
 							requiredMessage="O modelo é necessario!"
 							value="#{veiculoList.veiculo.modelo}" class="form-control" />
 					</div>
 				</div>
 				<div class="form-group">
 					<h:outputLabel for="placa" class="control-label col-sm-2">Placa: </h:outputLabel>
-					<div class="col-sm-10">
-						<h:inputText id="placa" required="true"
+					<div class="col-sm-9">
+						<b:inputText id="placa" required="true"
 							requiredMessage="A placa é necessaria"
 							value="#{veiculoList.veiculo.placa}" class="form-control" />
 					</div>
@@ -92,7 +92,7 @@
 				<div class="form-group">
 					<div class="col-sm-2"></div>
 					<div class="col-sm-4">
-						<p:commandButton value="Inserir veiculo"
+						<b:commandButton value="Inserir veiculo"
 							actionListener="#{veiculoList.updateOrInsert}" ajax="true"
 							update=":veiculoForm:veiculoTable :form"
 							listener="#{veiculoList.findAll}"
