@@ -5,10 +5,16 @@ import java.util.Calendar;
 public class Viagem {
 
 	private Integer id_viagem;
-	private Integer id_motorista;
-	private Integer id_veiculo;
-	private TIPO_VIAGEM tipo_viagem;
+	private ClasseGenerica motorista;
+	private ClasseGenerica veiculo;
+	private String tipo_viagem;
 	private Calendar data_viagem;
+
+	public Viagem() {
+		motorista = new ClasseGenerica();
+		veiculo = new ClasseGenerica();
+		data_viagem = Calendar.getInstance();
+	}
 
 	public Integer getId_viagem() {
 		return id_viagem;
@@ -18,39 +24,20 @@ public class Viagem {
 		this.id_viagem = id_viagem;
 	}
 
-	public Integer getId_motorista() {
-		return id_motorista;
+	public ClasseGenerica getMotorista() {
+		return motorista;
 	}
 
-	public void setId_motorista(Integer id_motorista) {
-		this.id_motorista = id_motorista;
+	public void setMotorista(ClasseGenerica motorista) {
+		this.motorista = motorista;
 	}
 
-	public Integer getId_veiculo() {
-		return id_veiculo;
+	public ClasseGenerica getVeiculo() {
+		return veiculo;
 	}
 
-	public void setId_veiculo(Integer id_veiculo) {
-		this.id_veiculo = id_veiculo;
-	}
-
-	public String getTipo_viagem() {
-		String tipo = "";
-
-		switch (this.tipo_viagem) {
-		case IDA:
-			tipo = "IDA";
-			break;
-		case VTA:
-			tipo = "VTA";
-			break;
-		}
-
-		return tipo;
-	}
-
-	public void setTipo_viagem(TIPO_VIAGEM tipo_viagem) {
-		this.tipo_viagem = tipo_viagem;
+	public void setVeiculo(ClasseGenerica veiculo) {
+		this.veiculo = veiculo;
 	}
 
 	public Calendar getData_viagem() {
@@ -61,8 +48,12 @@ public class Viagem {
 		this.data_viagem = data_viagem;
 	}
 
-	enum TIPO_VIAGEM {
-		IDA, VTA
+	public String getTipo_viagem() {
+		return tipo_viagem;
+	}
+
+	public void setTipo_viagem(String tipo_viagem) {
+		this.tipo_viagem = tipo_viagem;
 	}
 
 }

@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import JDBC.BaseDao;
-import entities.Motorista;
 import entities.Veiculo;
 
 public class VeiculoDao extends BaseDao {
