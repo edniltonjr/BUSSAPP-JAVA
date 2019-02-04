@@ -38,8 +38,7 @@ public class VeiculoDao extends BaseDao {
 		return v;
 
 	}
-	
-	
+
 	public Boolean updateOne(Veiculo v) throws SQLException {
 		String sql = "UPDATE veiculos SET modelo = ?, placa = ? WHERE id_veiculo = ?;";
 
@@ -47,12 +46,11 @@ public class VeiculoDao extends BaseDao {
 
 		ps.setString(1, v.getModelo());
 		ps.setString(2, v.getPlaca());
+		ps.setInt(3, v.getId_veiculo());
 
 		return ps.executeUpdate() > 0;
 	}
-	
-	
-	
+
 	public Boolean insertOne(Veiculo v) throws SQLException {
 		String sql = "INSERT INTO veiculos(modelo, placa) VALUE (?, ?);";
 
@@ -63,9 +61,7 @@ public class VeiculoDao extends BaseDao {
 
 		return ps.executeUpdate() > 0;
 	}
-	
-	
-	
+
 	public List<Veiculo> findAll() throws SQLException {
 		String sql = "SELECT * FROM veiculos;";
 
