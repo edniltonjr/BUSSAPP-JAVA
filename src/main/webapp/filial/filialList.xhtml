@@ -44,7 +44,7 @@
 				<h:column>
 					<f:facet name="header">Opções</f:facet>
 					<p:commandLink value="Editar" class="btn btn-warning"
-						onclick="PF('filialDialog').show();" ajax="true" update=":form">
+						oncomplete="PF('filialDialog').show();" ajax="true" update=":form">
 						<f:setPropertyActionListener value="#{f}"
 							target="#{filialList.filial}" />
 					</p:commandLink>

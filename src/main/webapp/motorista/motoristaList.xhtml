@@ -55,7 +55,7 @@
 				</h:column>
 				<p:column>
 					<f:facet name="header">Opções</f:facet>
-					<p:commandLink onclick="PF('createMotorista').show();"
+					<p:commandLink oncomplete="PF('createMotorista').show();"
 						value="Editar" class="btn btn-warning" ajax="true" update=":form">
 						<f:setPropertyActionListener value="#{m}"
 							target="#{motoristaList.motorista}" />
