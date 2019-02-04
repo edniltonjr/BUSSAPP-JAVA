@@ -133,6 +133,28 @@ public class FuncionarioDao extends BaseDao {
 
 			return filiais;
 		}
+
+		public Boolean insertOne(ClasseGenerica classeGenerica) throws SQLException {
+			String sql = "INSERT INTO filiais(nome) VALUE (?);";
+
+			PreparedStatement ps = getConnection().prepareStatement(sql);
+
+			ps.setString(1, classeGenerica.getNome());
+
+			return ps.executeUpdate() > 0;
+		}
+
+		public Boolean updateOne(ClasseGenerica classeGenerica) throws SQLException {
+			String sql = "UPDATE filiais SET nome = ? WHERE id_filial = ?;";
+
+			PreparedStatement ps = getConnection().prepareStatement(sql);
+
+			ps.setString(1, classeGenerica.getNome());
+			ps.setInt(2, classeGenerica.getId());
+
+			return ps.executeUpdate() > 0;
+		}
+
 	}
 
 	public class CargoDao extends BaseDao {

@@ -1,0 +1,92 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<!DOCTYPE HTML>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/menu/template.xhtml" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:b="http://bootsfaces.net/ui">
+	<ui:define name="style">
+		<title>Filiais</title>
+
+		<style>
+.tableUpdated {
+	width: 90% !important;
+	margin: 17px 58px 0 !important;
+}
+
+.columnWidth {
+	width: 4% !important;
+}
+
+.btnSpace {
+	margin: 17px;
+}
+</style>
+	</ui:define>
+	<ui:define name="conteudo">
+		<center>
+			<h2>
+				<h:outputText value="Filiais" />
+			</h2>
+		</center>
+		<h:form id="filialForm">
+			<h:dataTable id="filialTable" value="#{filialList.filiais}" var="f"
+				class="table table-striped table-hover table-bordered tableUpdated">
+				<h:column>
+					<f:facet name="header">Id</f:facet>
+					<h:outputText value="#{f.id}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Nome da filial</f:facet>
+					<h:outputText value="#{f.nome}" />
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Opções</f:facet>
+					<p:commandLink value="Editar" class="btn btn-warning"
+						onclick="PF('filialDialog').show();" ajax="true" update=":form">
+						<f:setPropertyActionListener value="#{f}"
+							target="#{filialList.filial}" />
+					</p:commandLink>
+				</h:column>
+
+			</h:dataTable>
+			<center>
+				<p:commandButton ajax="true" onclick="PF('filialDialog').show();"
+					value="Criar nova filial" class="btn btn-success btnSpace" />
+			</center>
+		</h:form>
+
+		<p:dialog width="50%" id="filialDialog" header="Filial"
+			widgetVar="filialDialog">
+			<h:form id="form" class="form-horizontal">
+				<div class="form-group">
+					<div class="col-sm-10"></div>
+					<h2 style="text-align: center" class="col-sm-10">Inserir ou
+						editar filial</h2>
+				</div>
+				<hr />
+				<div class="form-group">
+					<h:outputLabel for="nome" class="control-label col-sm-2">Nome:</h:outputLabel>
+					<div class="col-sm-9">
+						<b:inputText id="nome" value="#{filialList.filial.nome}"
+							required="true" requiredMessage="O nome é necessário"
+							class="form-control" />
+					</div>
+				</div>
+
+
+				<div class="form-group">
+					<div class="col-sm-2"></div>
+					<div class="col-sm-4">
+						<b:commandButton value="Inserir filial" ajax="true"
+							update=":filialForm:filialTable :form"
+							class="btn btn-primary updateBtnStyle"
+							oncomplete="PF('filialDialog').hide();"
+							actionListener="#{filialList.updateOrInsert}" />
+					</div>
+				</div>
+			</h:form>
+		</p:dialog>
+	</ui:define>
+</ui:composition>
