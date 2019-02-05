@@ -81,7 +81,7 @@ public class ViagemDao extends BaseDao {
 	}
 
 	private void errorCalendar(Calendar c) {
-		c.set(Calendar.HOUR, c.get(Calendar.HOUR) - 2);
+		// c.set(Calendar.HOUR, c.get(Calendar.HOUR) - 2);
 	}
 
 	public Boolean insertPeopleViagem(ViagemConteudo vc) throws SQLException {
@@ -90,7 +90,7 @@ public class ViagemDao extends BaseDao {
 		PreparedStatement ps = getConnection().prepareStatement(sql);
 
 		ps.setInt(1, vc.getViagem().getId_viagem());
-		ps.setInt(2, vc.getPessoa().getId());
+		ps.setInt(2, vc.getFuncionario().getId());
 
 		return ps.executeUpdate() > 0;
 	}
@@ -101,9 +101,45 @@ public class ViagemDao extends BaseDao {
 		PreparedStatement ps = getConnection().prepareStatement(sql);
 
 		ps.setInt(1, vc.getViagem().getId_viagem());
-		ps.setInt(2, vc.getPessoa().getId());
+		ps.setInt(2, vc.getFuncionario().getId());
 
 		return ps.executeUpdate() > 0;
+	}
+
+	public List<ViagemConteudo> findAllViagem(Viagem viagem) throws SQLException {
+		String sql = "SELECT * FROM viagens_conteudo AS vc " + "INNER JOIN viagens AS v ON v.id_viagem = vc.id_viagem "
+				+ "INNER JOIN funcionarios AS f ON f.id_funcionario = vc.id_funcionario "
+				+ "INNER JOIN motoristas AS moto ON moto.id_motorista = v.id_motorista "
+				+ "INNER JOIN veiculos AS vei ON vei.id_veiculo = v.id_veiculo " + "WHERE vc.id_viagem = ?;";
+
+		PreparedStatement ps = getConnection().prepareStatement(sql);
+		ps.setInt(1, viagem.getId_viagem());
+
+		ResultSet rs = ps.executeQuery();
+
+		List<ViagemConteudo> viagemConteudos = new ArrayList<>();
+
+		while (rs.next()) {
+			ViagemConteudo vc = new ViagemConteudo();
+			vc.getFuncionario().setId(rs.getInt("id_funcionario"));
+			vc.getFuncionario().setNome(rs.getString("f.nome"));
+
+			vc.getViagem().setId_viagem(rs.getInt("id_viagem"));
+			vc.getViagem().getVeiculo().setId(rs.getInt("id_veiculo"));
+			vc.getViagem().getVeiculo().setNome(rs.getString("vei.modelo"));
+			vc.getViagem().getMotorista().setId(rs.getInt("id_motorista"));
+			vc.getViagem().getMotorista().setNome(rs.getString("moto.nome"));
+			vc.getViagem().setTipo_viagem(rs.getString("tipo_viagem"));
+			Timestamp t = rs.getTimestamp("data_viagem");
+			Calendar c = Calendar.getInstance();
+			c.setTimeInMillis(t.getTime());
+			vc.getViagem().setData_viagem(c);
+
+			viagemConteudos.add(vc);
+
+		}
+
+		return viagemConteudos;
 	}
 
 }

@@ -3,7 +3,12 @@ package entities;
 public class ViagemConteudo {
 
 	private Viagem viagem;
-	private ClasseGenerica pessoa;
+	private ClasseGenerica funcionario;
+
+	public ViagemConteudo() {
+		viagem = new Viagem();
+		funcionario = new ClasseGenerica();
+	}
 
 	public Viagem getViagem() {
 		return viagem;
@@ -13,12 +18,12 @@ public class ViagemConteudo {
 		this.viagem = viagem;
 	}
 
-	public ClasseGenerica getPessoa() {
-		return pessoa;
+	public ClasseGenerica getFuncionario() {
+		return funcionario;
 	}
 
-	public void setPessoa(ClasseGenerica pessoa) {
-		this.pessoa = pessoa;
+	public void setFuncionario(ClasseGenerica funcionario) {
+		this.funcionario = funcionario;
 	}
 
 }

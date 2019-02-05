@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<!DOCTYPE HTML>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/menu/template.xhtml" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:b="http://bootsfaces.net/ui">
+	<ui:define name="style">
+		<title>Funcionarios na viagem</title>
+
+		<style>
+.tableUpdated {
+	width: 90% !important;
+	margin: 17px 58px 0 !important;
+}
+
+.columnWidth {
+	width: 4% !important;
+}
+
+.btnSpace {
+	margin: 17px;
+}
+</style>
+	</ui:define>
+	<ui:define name="conteudo">
+		<br />
+		<center>
+			<h2>
+				<h:outputText value="Funcionarios na viagem" />
+			</h2>
+		</center>
+		<center>
+			<p:panelGrid columns="2" style="text-align: center !important;">
+				<f:facet name="header">
+					<p:outputLabel value="Dados da viagem" />
+				</f:facet>
+				<p:outputLabel value="Motorista: " />
+				<p:outputLabel value="#{contentViagemList.viagem.motorista.nome}" />
+
+				<p:outputLabel value="Veiculo : " />
+				<p:outputLabel value="#{contentViagemList.viagem.veiculo.nome}" />
+
+				<p:outputLabel value="Data da viagem : " />
+				<b:dateTimePicker show-icon="false" disabled="true"
+					value="#{contentViagemList.viagem.data_viagem.time}" />
+
+				<p:outputLabel value="Tipo da viagem : " />
+				<p:outputLabel value="#{contentViagemList.viagem.tipo_viagem}" />
+
+			</p:panelGrid>
+		</center>
+
+		<h:form id="funcvForm">
+			<b:dataTable id="funcvTable"
+				value="#{contentViagemList.viagemConteudos}" var="vc"
+				class="table table-striped table-hover table-bordered tableUpdated">
+				<b:dataTableColumn value="#{vc.funcionario.id}"
+					label="Id do funcionario" />
+				<b:dataTableColumn value="#{vc.funcionario.nome}"
+					label="Nome do funcionario" />
+
+				<b:column style="width: 20% !important">
+
+					<f:facet name="header">Opções</f:facet>
+
+					<p:commandLink look="danger" class="btn btn-danger"
+						style="width: 100% !important"
+						oncomplete="PF('createFunc').show();" value="Excluir da viagem"
+						ajax="true">
+						<f:setPropertyActionListener value="#{vc}"
+							target="#{contentViagemList.conteudo}" />
+					</p:commandLink>
+
+				</b:column>
+
+
+			</b:dataTable>
+			<center>
+				<b:commandButton value="Inserir funcionario"
+					class="btn btn-success btnSpace" ajax="true"
+					onclick="PF('createFunc').show();" />
+			</center>
+		</h:form>
+
+		<p:dialog widgetVar="createFunc" width="50%" resizable="false">
+
+
+
+		</p:dialog>
+
+
+	</ui:define>
+</ui:composition>

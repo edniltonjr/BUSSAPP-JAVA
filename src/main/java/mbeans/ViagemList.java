@@ -5,7 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 import entities.Motorista;
 import entities.Veiculo;
@@ -15,8 +16,8 @@ import uDao.VeiculoDao;
 import uDao.ViagemDao;
 import util.Mensagem;
 
-@ManagedBean
-@ViewScoped
+@ManagedBean(name = "viagemList", eager = true)
+@SessionScoped
 public class ViagemList {
 
 	private List<Viagem> viagens;
@@ -118,6 +119,17 @@ public class ViagemList {
 
 	public void setViagem(Viagem viagem) {
 		this.viagem = viagem;
+	}
+
+	public String selectViagem() {
+		if (viagem != null) {
+			return "contentViagemList?faces-redirect=true";
+		}
+
+		FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
+		Mensagem.Make("Selecione uma viagem !");
+
+		return "/";
 	}
 
 }
