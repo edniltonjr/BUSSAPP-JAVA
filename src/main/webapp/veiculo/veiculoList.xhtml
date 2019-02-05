@@ -29,8 +29,8 @@
 				<h:outputText value="Veiculos" />
 			</h2>
 		</center>
-		<h:form id="veiculoForm">
-			<h:dataTable id="veiculoTable" value="#{veiculoList.veiculos}"
+		<h:form id="veiculoForm" class="sizeForm">
+			<b:dataTable id="veiculoTable" value="#{veiculoList.veiculos}"
 				var="v"
 				class="table table-dark table-striped table-hover table-bordered tableUpdated">
 				<h:column>
@@ -46,18 +46,18 @@
 					<h:outputText value="#{v.placa}" />
 				</h:column>
 
-				<p:column>
-					<f:facet name="header">Opções</f:facet>
+				<b:dataTableColumn style="width: 15% !important" label="Opções">
 
-					<p:commandLink oncomplete="PF('createVeiculo').show();"
-						value="Editar" class="btn btn-warning" ajax="true" update=":form">
+					<p:commandLink style="width: 100% !important"
+						oncomplete="PF('createVeiculo').show();" value="Editar"
+						class="btn btn-warning" ajax="true" update=":form">
 
 						<f:setPropertyActionListener value="#{v}"
 							target="#{veiculoList.veiculo}" />
 					</p:commandLink>
-				</p:column>
+				</b:dataTableColumn>
 
-			</h:dataTable>
+			</b:dataTable>
 			<center>
 				<p:commandButton value="Criar novo veiculo"
 					class="btn btn-success btnSpace"

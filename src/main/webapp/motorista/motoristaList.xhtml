@@ -29,8 +29,8 @@
 				<h:outputText value="Motoristas" />
 			</h2>
 		</center>
-		<h:form id="motoristaForm">
-			<h:dataTable id="motoristaTable" value="#{motoristaList.motoristas}"
+		<h:form id="motoristaForm" class="sizeForm">
+			<b:dataTable id="motoristaTable" value="#{motoristaList.motoristas}"
 				var="m"
 				class="table table-dark table-striped table-hover table-bordered tableUpdated">
 				<h:column>
@@ -53,16 +53,16 @@
 					<f:facet name="header">CNH</f:facet>
 					<h:outputText value="#{m.tipo_cnh.nome}" />
 				</h:column>
-				<p:column>
-					<f:facet name="header">Opções</f:facet>
-					<p:commandLink oncomplete="PF('createMotorista').show();"
-						value="Editar" class="btn btn-warning" ajax="true" update=":form">
+				<b:dataTableColumn style="width: 15% !important" label="Opções">
+					<p:commandLink style="width: 100% !important"
+						oncomplete="PF('createMotorista').show();" value="Editar"
+						class="btn btn-warning" ajax="true" update=":form">
 						<f:setPropertyActionListener value="#{m}"
 							target="#{motoristaList.motorista}" />
 					</p:commandLink>
-				</p:column>
+				</b:dataTableColumn>
 
-			</h:dataTable>
+			</b:dataTable>
 			<center>
 				<p:commandButton value="Criar novo motorista"
 					class="btn btn-success btnSpace"

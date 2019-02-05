@@ -29,8 +29,8 @@
 				<h:outputText value="Funcionarios" />
 			</h2>
 		</center>
-		<h:form id="funcionarioForm">
-			<h:dataTable id="funcionarioTable"
+		<h:form class="sizeForm" id="funcionarioForm">
+			<b:dataTable id="funcionarioTable"
 				value="#{funcionarioList.funcionarios}" var="f"
 				class="table table-striped table-hover table-bordered tableUpdated">
 				<h:column>
@@ -44,7 +44,7 @@
 				<h:column>
 					<f:facet name="header">CPF</f:facet>
 					<h:outputText value="#{f.cpf}" />
-					
+
 				</h:column>
 				<h:column>
 					<f:facet name="header">Cargo</f:facet>
@@ -54,17 +54,17 @@
 					<f:facet name="header">Filial</f:facet>
 					<h:outputText value="#{f.filial.nome}" />
 				</h:column>
-				<h:column>
-					<f:facet name="header">Opções</f:facet>
-					<p:commandLink value="Editar" class="btn btn-warning"
+				<b:dataTableColumn style="width: 15% !important" label="Opções">
+					<p:commandLink style="width: 100% !important" value="Editar"
+						class="btn btn-warning"
 						oncomplete="PF('funcionarioDialog').show();" ajax="true"
 						update=":form">
 						<f:setPropertyActionListener value="#{f}"
 							target="#{funcionarioList.funcionario}" />
 					</p:commandLink>
-				</h:column>
+				</b:dataTableColumn>
 
-			</h:dataTable>
+			</b:dataTable>
 			<center>
 				<p:commandButton ajax="true"
 					onclick="PF('funcionarioDialog').show();"
@@ -91,11 +91,11 @@
 				<div class="form-group">
 					<h:outputLabel for="cpf" class="control-label col-sm-2">CPF:</h:outputLabel>
 					<div class="col-sm-9">
-						<b:inputText id="cpf" mask="999.999.999-99" value="#{funcionarioList.funcionario.cpf}"
-							required="true" requiredMessage="O cpf é necessário"
-							class="form-control" />
-                        
-                        
+						<b:inputText id="cpf" mask="999.999.999-99"
+							value="#{funcionarioList.funcionario.cpf}" required="true"
+							requiredMessage="O cpf é necessário" class="form-control" />
+
+
 					</div>
 				</div>
 

@@ -31,10 +31,18 @@
 			</h2>
 		</center>
 		<center>
-			<p:panelGrid columns="2" style="text-align: center !important;">
+			<h:panelGrid
+				styleClass="table table-dark table-striped tableUpdated table-bordered"
+				columns="2"
+				style="text-align: center !important; width: 35% !important">
+
 				<f:facet name="header">
-					<p:outputLabel value="Dados da viagem" />
+					<center>
+						<h:outputLabel value="Dados da viagem" class="thead-light" />
+					</center>
 				</f:facet>
+
+
 				<p:outputLabel value="Motorista: " />
 				<p:outputLabel value="#{contentViagemList.viagem.motorista.nome}" />
 
@@ -43,15 +51,17 @@
 
 				<p:outputLabel value="Data da viagem : " />
 				<b:dateTimePicker show-icon="false" disabled="true"
-					value="#{contentViagemList.viagem.data_viagem.time}" />
+					value="#{contentViagemList.viagem.data_viagem.time}"
+					style="text-align: center !important" />
 
 				<p:outputLabel value="Tipo da viagem : " />
 				<p:outputLabel value="#{contentViagemList.viagem.tipo_viagem}" />
 
-			</p:panelGrid>
+			</h:panelGrid>
 		</center>
+		<br />
 
-		<h:form id="funcvForm">
+		<h:form id="funcvForm" class="sizeForm">
 			<b:dataTable id="funcvTable"
 				value="#{contentViagemList.viagemConteudos}" var="vc"
 				class="table table-striped table-hover table-bordered tableUpdated">

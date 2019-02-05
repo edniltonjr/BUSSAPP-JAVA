@@ -29,8 +29,8 @@
 				<h:outputText value="Cargos" />
 			</h2>
 		</center>
-		<h:form id="cargoForm">
-			<h:dataTable id="cargoTable" value="#{cargoList.cargos}" var="c"
+		<h:form id="cargoForm" class="sizeForm">
+			<b:dataTable id="cargoTable" value="#{cargoList.cargos}" var="c"
 				class="table table-striped table-hover table-bordered tableUpdated">
 				<h:column>
 					<f:facet name="header">Id</f:facet>
@@ -41,16 +41,17 @@
 					<h:outputText value="#{c.nome}" />
 				</h:column>
 
-				<h:column>
+				<b:column style="width: 15% !important">
 					<f:facet name="header">Opções</f:facet>
-					<p:commandLink value="Editar" class="btn btn-warning"
-						oncomplete="PF('cargoDialog').show();" ajax="true" update=":form">
+					<p:commandLink style="width: 100% !important" value="Editar"
+						class="btn btn-warning" oncomplete="PF('cargoDialog').show();"
+						ajax="true" update=":form">
 						<f:setPropertyActionListener value="#{c}"
 							target="#{cargoList.cargo}" />
 					</p:commandLink>
-				</h:column>
+				</b:column>
 
-			</h:dataTable>
+			</b:dataTable>
 			<center>
 				<p:commandButton ajax="true" onclick="PF('cargoDialog').show();"
 					value="Criar novo cargo" class="btn btn-success btnSpace" />

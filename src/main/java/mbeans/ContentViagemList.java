@@ -41,7 +41,7 @@ public class ContentViagemList {
 
 			if (viagem.getId_viagem() == null) {
 
-				FacesContext.getCurrentInstance().getExternalContext().redirect("/viagem/viagemList.xhtml");
+				FacesContext.getCurrentInstance().getExternalContext().redirect("viagemList.xhtml");
 				return;
 			}
 
