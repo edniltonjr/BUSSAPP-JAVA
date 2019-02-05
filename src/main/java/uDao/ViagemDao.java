@@ -10,6 +10,7 @@ import java.util.List;
 
 import JDBC.BaseDao;
 import entities.Viagem;
+import entities.ViagemConteudo;
 
 public class ViagemDao extends BaseDao {
 
@@ -81,6 +82,28 @@ public class ViagemDao extends BaseDao {
 
 	private void errorCalendar(Calendar c) {
 		c.set(Calendar.HOUR, c.get(Calendar.HOUR) - 2);
+	}
+
+	public Boolean insertPeopleViagem(ViagemConteudo vc) throws SQLException {
+		String sql = "INSERT INTO viagens_conteudo(id_viagem, id_funcionario) VALUE (?, ?);";
+
+		PreparedStatement ps = getConnection().prepareStatement(sql);
+
+		ps.setInt(1, vc.getViagem().getId_viagem());
+		ps.setInt(2, vc.getPessoa().getId());
+
+		return ps.executeUpdate() > 0;
+	}
+
+	public Boolean deletePeopleViagem(ViagemConteudo vc) throws SQLException {
+		String sql = "DELETE FROM viagens_conteudo WHERE id_viagem = ? AND id_pessoa = ?;";
+
+		PreparedStatement ps = getConnection().prepareStatement(sql);
+
+		ps.setInt(1, vc.getViagem().getId_viagem());
+		ps.setInt(2, vc.getPessoa().getId());
+
+		return ps.executeUpdate() > 0;
 	}
 
 }

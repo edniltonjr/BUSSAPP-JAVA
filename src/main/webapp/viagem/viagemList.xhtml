@@ -30,8 +30,9 @@
 			</h2>
 		</center>
 		<h:form id="viagemForm">
-			<h:dataTable id="viagemTable" value="#{viagemList.viagens}" var="v"
-				class="table table-dark table-striped table-hover table-bordered tableUpdated">
+			<b:dataTable columnClasses="columnWidth" id="viagemTable"
+				value="#{viagemList.viagens}" var="v"
+				class="table table-striped table-hover table-bordered tableUpdated">
 				<h:column>
 					<f:facet name="header">Id</f:facet>
 					<h:outputText value="#{v.id_viagem}" />
@@ -57,17 +58,26 @@
 					</h:outputText>
 				</h:column>
 
-				<p:column>
+				<b:column style="width: 20% !important">
+
 					<f:facet name="header">Opções</f:facet>
 
-					<p:commandLink oncomplete="PF('createViagem').show();"
-						value="Editar" class="btn btn-warning" ajax="true" update=":form">
+					<p:commandLink style="width: 49% !important"
+						oncomplete="PF('createViagem').show();" value="Editar"
+						class="btn btn-warning" ajax="true" update=":form">
 						<f:setPropertyActionListener value="#{v}"
 							target="#{viagemList.viagem}" />
 					</p:commandLink>
-				</p:column>
+					<nbsp />
+					<p:commandLink style="width: 49% !important"
+						value="Inserir Pessoas" class="btn btn-success" ajax="true">
+						<f:setPropertyActionListener value="#{v}"
+							target="#{viagemList.viagem}" />
+					</p:commandLink>
+				</b:column>
 
-			</h:dataTable>
+
+			</b:dataTable>
 			<center>
 				<p:commandButton value="Criar nova viagem"
 					class="btn btn-success btnSpace"
@@ -76,7 +86,7 @@
 		</h:form>
 
 		<p:dialog widgetVar="createViagem" width="50%" resizable="false">
-			<h:form id="form" class="form-horizontal">
+			<b:form id="form" class="form-horizontal">
 				<div class="form-group">
 					<div class="col-sm-2"></div>
 					<h2 style="text-align: center" class="col-sm-4">Inserir ou
@@ -125,12 +135,10 @@
 				</div>
 
 				<div class="form-group">
-					<h:outputLabel for="modelo" class="control-label col-sm-2">Data da viagem:</h:outputLabel>
+					<h:outputLabel for="data" class="control-label col-sm-2">Data da viagem:</h:outputLabel>
 					<div class="col-sm-9">
-						<!-- <p:calendar value="#{viagemList.viagem.data_viagem.time}"
-							pattern="dd/MM/yyyy HH:mm:ss" /> -->
-
-						<b:dateTimePicker value="#{viagemList.viagem.data_viagem.time}" />
+						<b:dateTimePicker id="data"
+							value="#{viagemList.viagem.data_viagem.time}" disabled="false" />
 					</div>
 				</div>
 
@@ -144,9 +152,10 @@
 							oncomplete="PF('createViagem').hide();" />
 					</div>
 				</div>
-			</h:form>
-		</p:dialog>
+			</b:form>
 
+
+		</p:dialog>
 
 
 	</ui:define>
