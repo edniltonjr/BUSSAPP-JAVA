@@ -57,7 +57,7 @@ public class ContentViagemList {
 			funcionarios = funcionarioDao.findAll(viagem.getId_viagem());
 			conteudo = new ViagemConteudo();
 			funcionario = new Funcionario();
-
+			viagemList.findAll();
 		} catch (SQLException | IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
