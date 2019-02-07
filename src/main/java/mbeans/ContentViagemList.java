@@ -11,8 +11,10 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
+import entities.Funcionario;
 import entities.Viagem;
 import entities.ViagemConteudo;
+import uDao.FuncionarioDao;
 import uDao.ViagemDao;
 import util.Mensagem;
 
@@ -21,14 +23,20 @@ import util.Mensagem;
 public class ContentViagemList {
 
 	private List<ViagemConteudo> viagemConteudos;
-	private ViagemDao viagemDao;
+	private List<Funcionario> funcionarios;
+	private Funcionario funcionario; // funcionario selecionado
 
-	private Viagem viagem;
+	private ViagemDao viagemDao;
+	private FuncionarioDao funcionarioDao;
+	private Viagem viagem; // viagem trazida da outra tela
 	private ViagemConteudo conteudo;
 
 	public ContentViagemList() {
 		viagemConteudos = new ArrayList<>();
 		viagemDao = new ViagemDao();
+		funcionarios = new ArrayList<>();
+		funcionarioDao = new FuncionarioDao();
+		funcionario = new Funcionario();
 	}
 
 	@ManagedProperty(value = "#{viagemList}")
@@ -46,11 +54,44 @@ public class ContentViagemList {
 			}
 
 			viagemConteudos = viagemDao.findAllViagem(viagem);
+			funcionarios = funcionarioDao.findAll(viagem.getId_viagem());
+			conteudo = new ViagemConteudo();
+			funcionario = new Funcionario();
+
 		} catch (SQLException | IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			Mensagem.Make(e.toString());
 		}
+	}
+
+	public void inserirFuncionario() {
+		ViagemConteudo viagemConteudo = new ViagemConteudo();
+		viagemConteudo.setFuncionario(funcionario);
+		viagemConteudo.setViagem(viagem);
+		try {
+			if (viagemDao.insertPeopleViagem(viagemConteudo)) {
+				Mensagem.Make("Funcionario inserido com sucesso na viagem !");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Mensagem.Make(e.toString());
+		}
+		findAll();
+	}
+
+	public void deletarFuncionario() {
+		try {
+			if (viagemDao.deletePeopleViagem(conteudo)) {
+				Mensagem.Make("Funcionario deletado com sucesso na viagem !");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Mensagem.Make(e.toString());
+		}
+		findAll();
 	}
 
 	public List<ViagemConteudo> getViagemConteudos() {
@@ -79,6 +120,22 @@ public class ContentViagemList {
 
 	public void setConteudo(ViagemConteudo conteudo) {
 		this.conteudo = conteudo;
+	}
+
+	public List<Funcionario> getFuncionarios() {
+		return funcionarios;
+	}
+
+	public void setFuncionarios(List<Funcionario> funcionarios) {
+		this.funcionarios = funcionarios;
+	}
+
+	public Funcionario getFuncionario() {
+		return funcionario;
+	}
+
+	public void setFuncionario(Funcionario funcionario) {
+		this.funcionario = funcionario;
 	}
 
 }

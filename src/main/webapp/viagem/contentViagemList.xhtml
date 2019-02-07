@@ -4,7 +4,8 @@
 	template="/menu/template.xhtml" xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:b="http://bootsfaces.net/ui">
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 	<ui:define name="style">
 		<title>Funcionarios na viagem</title>
 
@@ -47,7 +48,7 @@
 				<p:outputLabel value="#{contentViagemList.viagem.motorista.nome}" />
 
 				<p:outputLabel value="Veiculo : " />
-				<p:outputLabel value="#{contentViagemList.viagem.veiculo.nome}" />
+				<p:outputLabel value="#{contentViagemList.viagem.veiculo.modelo}" />
 
 				<p:outputLabel value="Data da viagem : " />
 				<b:dateTimePicker show-icon="false" disabled="true"
@@ -65,40 +66,56 @@
 			<b:dataTable id="funcvTable"
 				value="#{contentViagemList.viagemConteudos}" var="vc"
 				class="table table-striped table-hover table-bordered tableUpdated">
-				<b:dataTableColumn value="#{vc.funcionario.id}"
+				<b:dataTableColumn value="#{vc.funcionario.id_funcionario}"
 					label="Id do funcionario" />
 				<b:dataTableColumn value="#{vc.funcionario.nome}"
 					label="Nome do funcionario" />
 
-				<b:column style="width: 20% !important">
-
-					<f:facet name="header">Opções</f:facet>
-
-					<p:commandLink look="danger" class="btn btn-danger"
-						style="width: 100% !important"
-						oncomplete="PF('createFunc').show();" value="Excluir da viagem"
-						ajax="true">
+				<b:dataTableColumn width="10%" label="Opções">
+					<p:commandLink style="width: 100% !important"
+						styleClass="btn btn-danger" value="Excluir da viagem" ajax="true"
+						update=":funcvForm"
+						action="#{contentViagemList.deletarFuncionario}">
 						<f:setPropertyActionListener value="#{vc}"
 							target="#{contentViagemList.conteudo}" />
 					</p:commandLink>
 
-				</b:column>
-
+				</b:dataTableColumn>
 
 			</b:dataTable>
 			<center>
-				<b:commandButton value="Inserir funcionario"
-					class="btn btn-success btnSpace" ajax="true"
-					onclick="PF('createFunc').show();" />
+				<b:commandButton type="button" value="Inserir funcionários"
+					class="btn btn-success btnSpace" pt:data-target="#modal"
+					pt:data-toggle="modal" />
 			</center>
 		</h:form>
 
-		<p:dialog widgetVar="createFunc" width="50%" resizable="false">
-
-
-
-		</p:dialog>
-
+		<b:modal auto-update="true" size="modal-lg"
+			title="Todos os funcionarios" id="modal">
+			<h:form id="formFunc">
+				<b:dataTable id="dataTableFunc"
+					styleClass="table table-dark table-striped tableUpdated table-bordered"
+					value="#{contentViagemList.funcionarios}" var="f">
+					<b:dataTableColumn value="#{f.id_funcionario}"
+						label="Id funcionário" width="2%" />
+					<b:dataTableColumn value="#{f.nome}" label="Nome funcionário" />
+					<b:dataTableColumn value="#{f.cpf}" label="CPF do funcionario" />
+					<b:dataTableColumn value="#{f.cargo.nome}"
+						label="Cargo do funcionário" />
+					<b:dataTableColumn value="#{f.filial.nome}"
+						label="Filial do funcionário" />
+					<b:dataTableColumn label="Opções">
+						<p:commandLink update=":funcvForm:funcvTable"
+							action="#{contentViagemList.inserirFuncionario}" ajax="true"
+							style="width: 100% !important;" value="Inserir funcionario"
+							styleClass="btn btn-primary" pt:data-dismiss="modal">
+							<f:setPropertyActionListener value="#{f}"
+								target="#{contentViagemList.funcionario}" />
+						</p:commandLink>
+					</b:dataTableColumn>
+				</b:dataTable>
+			</h:form>
+		</b:modal>
 
 	</ui:define>
 </ui:composition>
