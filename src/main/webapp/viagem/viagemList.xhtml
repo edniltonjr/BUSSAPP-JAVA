@@ -38,7 +38,7 @@
 				<b:dataTableColumn value="#{v.motorista.nome}"
 					label="Nome motorista" />
 
-				<b:dataTableColumn value="#{v.veiculo.nome}" />
+				<b:dataTableColumn value="#{v.veiculo.modelo}" />
 
 				<b:dataTableColumn value="#{v.tipo_viagem}" />
 
@@ -85,7 +85,8 @@
 				<div class="form-group">
 					<h:outputLabel for="modelo" class="control-label col-sm-2">Motorista:</h:outputLabel>
 					<div class="col-sm-9">
-						<b:selectOneMenu value="#{viagemList.viagem.motorista.id}"
+						<b:selectOneMenu
+							value="#{viagemList.viagem.motorista.id_motorista}"
 							required="true" requiredMessage="Um motorista é necessário !">
 							<f:selectItem itemLabel="Selecione um motorista" itemValue="" />
 
@@ -98,7 +99,7 @@
 				<div class="form-group">
 					<h:outputLabel for="modelo" class="control-label col-sm-2">Veiculo:</h:outputLabel>
 					<div class="col-sm-9">
-						<b:selectOneMenu value="#{viagemList.viagem.veiculo.id}"
+						<b:selectOneMenu value="#{viagemList.viagem.veiculo.id_veiculo}"
 							required="true" requiredMessage="Um veiculo é necessário !">
 							<f:selectItem itemLabel="Selecione um veiculo" itemValue="" />
 

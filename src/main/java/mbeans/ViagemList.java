@@ -15,6 +15,7 @@ import uDao.MotoristaDao;
 import uDao.VeiculoDao;
 import uDao.ViagemDao;
 import util.Mensagem;
+import util.RefreshingSessionClass;
 
 @ManagedBean(name = "viagemList", eager = true)
 @SessionScoped
@@ -38,15 +39,15 @@ public class ViagemList {
 		motoristas = new ArrayList<>();
 		veiculos = new ArrayList<>();
 		viagem = new Viagem();
+		RefreshingSessionClass.setViagemList(this);
 		findAll();
 	}
 
-	private void findAll() {
+	public void findAll() {
 		try {
 			viagens = viagemDao.findAll();
 			motoristas = motoristaDao.findAll();
 			veiculos = veiculoDao.findAll();
-			viagem = new Viagem();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
