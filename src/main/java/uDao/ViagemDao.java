@@ -3,6 +3,7 @@ package uDao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -36,6 +37,7 @@ public class ViagemDao extends BaseDao {
 		ps.setTimestamp(4, getTimestamp(v.getData_viagem()));
 
 		return ps.executeUpdate() > 0;
+
 	}
 
 	public Boolean updateOne(Viagem v) throws SQLException {
